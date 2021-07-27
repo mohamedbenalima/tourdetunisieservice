@@ -1,10 +1,15 @@
 const express = require('express') 
 const mongoose = require('mongoose')
-const url= 'mongodb://localhost/tunisieSites'
+//const url= 'mongodb://localhost/tunisieSites'
+const url ='mongodb+srv://mohamedbh3dwave:l4gd4gxIBVVE2BAp@cluster0.khpi8.mongodb.net/sitesdb?retryWrites=true&w=majority'
 
 const app = express() 
 
-mongoose.connect(url, {useNewUrlParser:true})  
+//mongoose.connect(url, {useNewUrlParser:true})  
+mongoose.connect(url,
+    { useNewUrlParser: true , useUnifiedTopology: true } )
+console.log('Connected to Database')
+
 
 const con = mongoose.connection
 
