@@ -22,6 +22,12 @@ app.use(express.json())
 const siteRouter = require('./routes/sites')
 app.use('/sites',siteRouter)
 
-app.listen(9000,()=>{
-    console.log("server started at port 9000")
-})
+// app.listen(9000,()=>{
+//     console.log("server started at port 9000")
+// })
+
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
+app.listen(server_port, server_host, function() {
+    console.log('Listening on port %d', server_port);
+});
