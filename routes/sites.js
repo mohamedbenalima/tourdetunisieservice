@@ -1,5 +1,19 @@
 const express = require('express')
 const router = express.Router()
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+         cb(null,'./uploads/');
+       
+    },
+    filename: function(req, file, cb){
+        // cb(null,new Date().toISOString() + file.originalname);
+        cb(null,  file.originalname);
+    }
+})
+
+const upload = multer({storage: storage})
 
 const Site = require('../models/sites')
 
@@ -46,7 +60,8 @@ router.get('/patrimoine/:pat', async (req,res)=>{
 
 })
 
-router.post('/post', async(req,res)=>{
+router.post('/post', upload.single('siteImage'), async(req,res)=>{
+    console.log(req.file)
     const site = new Site({
         name: req.body.name, 
         ville: req.body.ville ,
@@ -63,7 +78,8 @@ router.post('/post', async(req,res)=>{
         heure_ferm: req.body.heure_ferm,
         heure_ouv: req.body.heure_ouv,
         epoque: req.body.epoque, 
-        image: req.body.image, 
+        image: req.file.path,
+        //image: req.body.image, 
         panoramaPhoto: req.body.panoramaPhoto, 
         patrimoine: req.body.patrimoine
     })

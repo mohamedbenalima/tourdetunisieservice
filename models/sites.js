@@ -75,7 +75,7 @@ const siteSchema = new mongoose.Schema({
     },
     image: {
         type: String , 
-        default: "...",
+        //default: "...",
         required: true,
     },
     patrimoine: {

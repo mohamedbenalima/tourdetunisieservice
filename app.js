@@ -21,6 +21,7 @@ app.use(express.json())
 
 const siteRouter = require('./routes/sites')
 app.use('/sites',siteRouter)
+app.use('/uploads',express.static('uploads'));
 
 // app.listen(9000,()=>{
 //     console.log("server started at port 9000")
